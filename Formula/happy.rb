@@ -13,7 +13,18 @@ class Happy < Formula
     bin.install_symlink libexec/"bin/happy-mcp"
   end
 
+  def caveats
+    <<~EOS
+      To uninstall Happy:
+        brew uninstall happy
+
+      If you no longer need transitive dependencies like Node:
+        brew autoremove
+    EOS
+  end
+
   test do
+    assert_match "v", shell_output("#{Formula["node"].opt_bin}/node --version")
     assert_match version.to_s, shell_output("#{bin}/happy --version")
   end
 end
