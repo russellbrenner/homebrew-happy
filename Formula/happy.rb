@@ -24,7 +24,8 @@ class Happy < Formula
   end
 
   test do
-    assert_match "v", shell_output("#{Formula["node"].opt_bin}/node --version")
-    assert_match version.to_s, shell_output("#{bin}/happy --version")
+    assert_path_exists Formula["node"].opt_bin/"node"
+    assert_match "Happy CLI Doctor", shell_output("#{bin}/happy doctor")
+    assert_match "Daemon", shell_output("#{bin}/happy daemon status")
   end
 end
